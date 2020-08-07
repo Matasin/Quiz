@@ -1,0 +1,75 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 2% 10%;
+
+    letter-spacing: 1px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+button, a {
+    padding: 3%;
+    width: 50%;
+    font-size: 1.5em;
+    border-radius: 25px;
+    border: 3px solid transparent;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    margin: 2vh auto;
+
+    color: white;
+    text-decoration: none;
+    text-align: center;
+
+    background-color: #33b5e5;
+    transition: all 300ms ease;
+}
+button:hover, a:hover{ background-color:#0099CC; border: 3px solid black; color: black; }
+button:active, a:hover { transform: scale(1.03);}
+button:focus, a:hover { outline: none; border: 3px solid black;}
+
+
+
+/* A- + { something } = Animation { something } */
+.A-btn-appear {
+    opacity: 0.01;
+    margin-top: -5vh;
+}
+.A-btn-appear-active.A-btn-appear-done {
+    opacity: 1;
+    transition: opacity 400ms ease;
+}
+
+/* H1 greeting animation */
+.A-opacity-appear {
+    opacity: 0.01;
+}
+.A-opacity-appear.A-opacity-appear-active {
+    opacity: 1;
+    transition: opacity 1000ms ease;
+}
+
+@media (max-width: 900px) {
+    body {
+        max-width: 90%;
+        max-height: 100%;
+    }
+    .NumberQuestions .Greeting-Header{
+        margin: 5vh auto;
+    }
+    .Questions {
+        min-width: 80%;
+        padding-bottom: 0;
+    }
+    .NumberQuestions-Input {
+        min-width: 20vw;
+    }
+    button, a {
+        width: auto;
+        max-width: 250px;
+        margin-bottom: 0;
+    }
+}
