@@ -15,13 +15,7 @@ import{
 
 const App = () => (
     <Router>
-        <div
-            style={{
-                fontSize: '35px',
-            }}
-        >
-            Quiz Logo
-        </div>
+        <img src={process.env.PUBLIC_URL + '/images/Logo.png'} alt='Logo' className='Logo'/>
         <Switch>
             <Route path='/' exact component={Greeting} />
             <Route path='/count_questions' component={NumberQuestions} />

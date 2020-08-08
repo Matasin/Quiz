@@ -8,6 +8,12 @@ body {
     letter-spacing: 1px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+.Logo {
+    height: 10vh;
+    position: absolute;
+    right: 0;
+    mix-blend-mode: multiply;
+}
 button, a {
     padding: 3%;
     width: 50%;

@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from'react';
 import './Questions.css'
-import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
+
+import { QuestionsCounter } from './Resources/QuestionsCounter'
+import { QuestionsContainer } from './Resources/QuestionsContainer'
+import { ButtonNextQuestion } from './Resources/ButtonNextQuestion'
+import { LinkToResults } from './Resources/LinkToResults'
+
 
 const Questions = ( props ) => {
     const countOfMaxQuestion = props.location.state.count;
@@ -12,7 +17,6 @@ const Questions = ( props ) => {
 
     useEffect(() => {
         fetch(`https://opentdb.com/api.php?amount=${countOfMaxQuestion}`)
-        // fetch(`https://opentdb.com/api.php?amount=` + countOfMaxQuestion) // dunno why but its work
             .then(response => response.json())
             .then(data => setDataQuestion(data.results));
     }, [countOfMaxQuestion])
@@ -26,113 +30,66 @@ const Questions = ( props ) => {
     const checkIsCorrect = (event) => {
         const value = event.target.value
         const correctAnswer = dataQuestion[currentQuestion].correct_answer;
-        if(canSetPoint === true) {
-            value === correctAnswer ?
-            setPoints(points + 1)
-            :
-            setPoints(points)
-        };
-        setCanSetPoint(false)
+        if(canSetPoint === true && value === correctAnswer) {
+            setCanSetPoint(false);
+            return setPoints(points + 1);
+        }
+        setCanSetPoint(true);
+        console.log(canSetPoint)
+        // const onlyOneTime = () =>{
+        //     if(points - 1 === points -2){return setPoints(points)}
+        // }
+        return points === 0 ? setPoints(points) : setPoints(points-1);
     }
     return (
         <div className='Questions'>
-            <div className='Questions-Counter'> 
-                Question : {(currentQuestion + 1) + '/' + countOfMaxQuestion} 
-                {/* {'Your points: ' + points} */}
-            </div>
-            <div className='Questions-Container'>
-                <div className='Question-Info'>
-                    <p>{dataQuestion[currentQuestion].category} ({dataQuestion[currentQuestion].difficulty}) </p>
-                </div>
-                <div className='Question-Question'>  
-                    <p>{dataQuestion[currentQuestion].question}</p>
-                </div>
-                <div className='Question-Answers'>  
-                    {array.concat(array2).map( (answer, index) => {
-                        return (
-                            <CSSTransition
-                                in= { true }
-                                appear = { true }
-                                timeout= { 500 }
-                                classNames= { 'A-opacity' }
-                                key={index}
-                            >
-                                <button 
-                                    className='NumberQuestions-Keep-Going-Button'
-                                    style= {{minWidth: '200px'}}
-                                    onClick= {checkIsCorrect}
-                                    value={answer}
-                                >
-                                    {answer}
-                                </button>
-                            </CSSTransition>
-                        )
-                    })}
-                </div>
-            </div>
-            {
-                currentQuestion + 1 >= countOfMaxQuestion 
-                ? 
-                    <CSSTransition
-                        in= { true }
-                        appear = { true }
-                        timeout= { 500 }
-                        classNames= { 'A-btn' }
-                    >
-                        <LinkToResults 
-                            currentQuestion={currentQuestion}
-                            setCurrentQuestion={setCurrentQuestion}
+            { 'points ' +  points}
+            {/* Count of question */}
+            <QuestionsCounter 
+                currentQuestion= {currentQuestion}
+                countOfMaxQuestion= {countOfMaxQuestion}
+            />
+            {/* Container with info about Category and question + anwers */}
+            <QuestionsContainer
+                dataQuestion= {dataQuestion}
+                currentQuestion= {currentQuestion}
+                array= {array}
+                array2= {array2}
+                checkIsCorrect= {checkIsCorrect}
+            />
+
+            {/* Condition who is showing button or link to result depends on the points  */}
+            {currentQuestion + 1 >= countOfMaxQuestion ? 
+                <CSSTransition
+                    in= { true }
+                    appear = { true }
+                    timeout= { 500 }
+                    classNames= { 'A-btn' }
+                >
+                    <LinkToResults 
+                        currentQuestion={currentQuestion}
+                        setCurrentQuestion={setCurrentQuestion}
                             points= {points}
-                            countOfMaxQuestion = {countOfMaxQuestion}
-                        />
-                    </CSSTransition>
-                    : 
-                    <CSSTransition
-                        in= { true }
-                        appear = { true }
-                        timeout= { 500 }
-                        classNames= { 'A-btn' }
-                    >
-                        <ButtonNextQuestion
-                            currentQuestion= {currentQuestion}
-                            setCurrentQuestion= {setCurrentQuestion}
-                            setCanSetPoint= {setCanSetPoint}
-                        />
-                    </CSSTransition>
+                        countOfMaxQuestion = {countOfMaxQuestion}
+                    />
+                </CSSTransition>
+                : 
+                <CSSTransition
+                    in= { true }
+                    appear = { true }
+                    timeout= { 500 }
+                    classNames= { 'A-btn' }
+                >
+                    <ButtonNextQuestion
+                        currentQuestion= {currentQuestion}
+                        setCurrentQuestion= {setCurrentQuestion}
+                        setCanSetPoint= {setCanSetPoint}
+                    />
+                </CSSTransition>
             }
         </div>
     )
 }
-const ButtonNextQuestion = ({currentQuestion, setCurrentQuestion, setCanSetPoint}) => {
-    const handleBothfunction = () => {
-        setCanSetPoint(true);
-        setCurrentQuestion(currentQuestion + 1)
-    }
-    return (
-        <button 
-            to='results'
-            style= {{minWidth: '350px', maxWidth: '350px'}}
-            onClick={handleBothfunction}
-        > 
-            Next Questions
-        </button>
-    )
-}
-const LinkToResults=  ({currentQuestion, setCurrentQuestion, points, countOfMaxQuestion}) => (
-    <Link
-        to={{
-            pathname: '/results',
-            state: { 
-                points,
-                countOfMaxQuestion
-            }
-        }} 
-        style= {{minWidth: '250px', maxWidth: '250px'}}
-        onClick={ () => setCurrentQuestion( currentQuestion + 1)}
-    > 
-        See Your results
-    </Link>
-)
 
 
 export default Questions;

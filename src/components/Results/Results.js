@@ -9,7 +9,7 @@ const Results = ( props ) => {
             <div className='Results-Container'>
                 <div className='Score-Score'>Your score: {score}</div>
                 <div className='Score-CountOfMaxQuestion'>Question/s: {countOfMaxQuestion}</div>
-                <div className='Score-Percentage-Score'>Accuracy: {(score / countOfMaxQuestion * 100)+ '%' }  </div>
+                <div className='Score-Percentage-Score'>Accuracy: {Math.round(score / countOfMaxQuestion * 100)+ '%' }  </div>
             </div>
         </div>
     )
