@@ -59,23 +59,34 @@ button:focus, a:hover { outline: none; border: 3px solid black;}
 }
 
 @media (max-width: 900px) {
-    body {
+    /* body {
         max-width: 90%;
         max-height: 100%;
+    } */
+    button, a {
+        width: auto;
+        max-width: 90%;
+        margin-bottom: 0;
     }
     .NumberQuestions .Greeting-Header{
         margin: 5vh auto;
     }
+    .NumberQuestions-Input {
+        max-width: 25vw;
+        margin: 0 auto;
+    }
+    .NumberQuestions-Button {
+        color: black;
+    }
     .Questions {
         min-width: 80%;
-        padding-bottom: 0;
     }
-    .NumberQuestions-Input {
-        min-width: 20vw;
-    }
-    button, a {
-        width: auto;
-        max-width: 250px;
-        margin-bottom: 0;
+    .Results {
+        margin: 10vh auto;
+        position: absolute;
+        max-width: 60%;
+        left: 5%;
+        right: 5%;
+        /* max-width: 60vw; */
     }
 }
