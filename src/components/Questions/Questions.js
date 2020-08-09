@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from'react';
 import './Questions.css'
-import { CSSTransition } from 'react-transition-group'
 
 import { QuestionsCounter } from './Resources/QuestionsCounter'
 import { QuestionsContainer } from './Resources/QuestionsContainer'
@@ -65,33 +64,21 @@ const Questions = ( props ) => {
             />
 
             {/* Condition who is showing button or link to result depends on the points  */}
-            {currentQuestion + 1 >= countOfMaxQuestion ? 
-                <CSSTransition
-                    in= { true }
-                    appear = { true }
-                    timeout= { 500 }
-                    classNames= { 'A-btn' }
-                >
-                    <LinkToResults 
-                        currentQuestion={currentQuestion}
-                        setCurrentQuestion={setCurrentQuestion}
-                            points= {points}
-                        countOfMaxQuestion = {countOfMaxQuestion}
-                    />
-                </CSSTransition>
+            {
+                currentQuestion + 1 >= countOfMaxQuestion 
+                ? 
+                <LinkToResults 
+                    currentQuestion={currentQuestion}
+                    setCurrentQuestion={setCurrentQuestion}
+                    points= {points}
+                    countOfMaxQuestion = {countOfMaxQuestion}
+                />
                 : 
-                <CSSTransition
-                    in= { true }
-                    appear = { true }
-                    timeout= { 500 }
-                    classNames= { 'A-btn' }
-                >
-                    <ButtonNextQuestion
-                        currentQuestion= {currentQuestion}
-                        setCurrentQuestion= {setCurrentQuestion}
-                        setCanSetPoint= {setCanSetPoint}
-                    />
-                </CSSTransition>
+                <ButtonNextQuestion
+                    currentQuestion= {currentQuestion}
+                    setCurrentQuestion= {setCurrentQuestion}
+                    setCanSetPoint= {setCanSetPoint}
+                />
             }
         </div>
     )
