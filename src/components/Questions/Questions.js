@@ -49,7 +49,7 @@ const Questions = ( props ) => {
     }
     return (
         <div className='Questions'>
-            { 'points ' +  points}
+            {/* { 'points ' +  points} */}
             {/* Count of question */}
             <QuestionsCounter 
                 currentQuestion= {currentQuestion}
