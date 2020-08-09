@@ -31,10 +31,10 @@ const Questions = ( props ) => {
 
     // Create 2 testArrays for add this to one correct array
     const TestArray = []; 
-    // Add incorect answer
-    const TestArray2 = dataQuestion[currentQuestion].incorrect_answers;
     // Add corect answer
     TestArray.push(dataQuestion[currentQuestion].correct_answer)
+    // Add incorect answer
+    const TestArray2 = dataQuestion[currentQuestion].incorrect_answers;
     //Scale arrays
     const arrayOfAnswers = TestArray.concat(TestArray2);
     

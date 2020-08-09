@@ -3,9 +3,8 @@ import { CSSTransition } from 'react-transition-group'
 
 export const QuestionAnswers = ( {arrayOfAnswers, checkIsCorrect} ) => {
 
-    const shuffle = (array) => array.sort( () => Math.random - 0.5);
-    shuffle(arrayOfAnswers)
-
+    const shuffle = ( array ) => array.sort(() => Math.random() - 0.5);
+    shuffle(arrayOfAnswers);
     return (
         <div className='Question-Answers'>  
             {arrayOfAnswers.map( (answer, index) => {
@@ -15,15 +14,15 @@ export const QuestionAnswers = ( {arrayOfAnswers, checkIsCorrect} ) => {
                         appear = { true }
                         timeout= { 500 }
                         classNames= { 'A-opacity' }
-                        key={index}
+                        key={ index }
                     >
                         <button 
                             className='NumberQuestions-Keep-Going-Button'
-                            style= {{minWidth: '200px'}}
-                            onClick= {checkIsCorrect}
-                            value={answer}
+                            style= {{ minWidth: '200px'} }
+                            value={ answer }
+                            onClick= { checkIsCorrect }
                         >
-                            {answer}
+                            { answer }
                         </button>
                     </CSSTransition>
                 )

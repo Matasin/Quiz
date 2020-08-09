@@ -1,15 +1,23 @@
 import React, {  } from'react';
 import './Results.css'
 
+import { ResultsScore } from './Resources/Results-Score'
+import { Header } from '../../General-Components/Header'
+
 const Results = ( props ) => {
     const score = props.location.state.points;
     const countOfMaxQuestion = props.location.state.countOfMaxQuestion;
     return (
         <div className='Results'>
+            <Header
+                Hindex= { 'h2' }
+                text= { 'There is your results' }
+            />
             <div className='Results-Container'>
-                <div className='Score-Score'>Your score: {score}</div>
-                <div className='Score-CountOfMaxQuestion'>Question/s: {countOfMaxQuestion}</div>
-                <div className='Score-Percentage-Score'>Accuracy: {Math.round(score / countOfMaxQuestion * 100)+ '%' }  </div>
+                <ResultsScore
+                    score= { score }
+                    countOfMaxQuestion= { countOfMaxQuestion }
+                />
             </div>
         </div>
     )

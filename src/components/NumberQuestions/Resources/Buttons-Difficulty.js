@@ -6,7 +6,7 @@ const buttonsDificulity = [
     'medium',
     'hard',
     'any'
-]
+];
 export const ButtonsDifficulty = ( {setDifficulty} ) => (
     <div className='NumberQuestions-Buttons-Difficulty'>
         {buttonsDificulity.map( (level, key) => {
@@ -19,7 +19,7 @@ export const ButtonsDifficulty = ( {setDifficulty} ) => (
                     key= {key}
                 >
                     <button
-                        className='NumberQuestions-Input'
+                        className='NumberQuestions-Button'
                         type='text' 
                         placeholder= {level}
                         onClick={() => setDifficulty(level)}

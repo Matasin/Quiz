@@ -2,7 +2,7 @@ import React from 'react';
 import { CSSTransition } from 'react-transition-group'
 
 export const InputMaxQuestions = ( {countRef, setCountOfQuestions} ) => (
-    <div className='Greeting-Keep-Going-Container'>
+    <div className='NumberQuestions-Inpu-Container'>
         <CSSTransition
             in= { true }
             appear = { true }

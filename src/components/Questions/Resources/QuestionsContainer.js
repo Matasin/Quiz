@@ -4,15 +4,18 @@ import { QuestionAnswers } from './QuestionAnswers'
 export const QuestionsContainer = ( {dataQuestion, currentQuestion, arrayOfAnswers, checkIsCorrect } ) => (
     <div className='Questions-Container'>
         <div className='Question-Info'>
-            <p>
-                Category: {dataQuestion[currentQuestion].category} 
+            <div>
+                Category: <span style={{color: '#00C851'}}> {dataQuestion[currentQuestion].category} </span>
                 <i>({dataQuestion[currentQuestion].difficulty})</i> 
-            </p>
+            </div>
         </div>
         <div className='Question-Question'>  
-            <p>
-                Question is: {dataQuestion[currentQuestion].question}
-            </p>
+            <div>
+                Question is: 
+                    <div style={{color: '#ff4444'}}>
+                        {dataQuestion[currentQuestion].question}
+                    </div>
+            </div>
         </div>
         <QuestionAnswers
             arrayOfAnswers= {arrayOfAnswers}

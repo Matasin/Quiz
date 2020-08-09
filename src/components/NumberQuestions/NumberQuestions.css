@@ -1,12 +1,18 @@
+.NumberQuestions-Inpu-Container {
+    text-align: center;
+}
 .NumberQuestions-Input {
     line-height: 5vh;
     padding: 1vh;
     width: auto;
     font-size: 2em;
     border-radius: 10px;
-    text-transform: capitalize;
 }
 .NumberQuestions-Buttons-Difficulty {
     display: flex;
     margin: 2vh auto;
+}
+.NumberQuestions-Button {
+    width: 15%;
+    text-transform: capitalize;
 }

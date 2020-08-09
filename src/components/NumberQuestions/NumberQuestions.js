@@ -43,7 +43,7 @@ const NumberQuestions = () => {
 
             <Header
                 Hindex= {'h3'}
-                text= {'Default "Any" category and 10 questions'}
+                text= {'Default "Any" level difficulty, 10 questions'}
             />
         </div>
     )
