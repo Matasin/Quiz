@@ -9,38 +9,36 @@ import { LinkToResults } from './Resources/LinkToResults'
 
 
 const Questions = ( props ) => {
+
     const countOfMaxQuestion = props.location.state.count;
+    const difficulty = props.location.state.difficulty;
+
     const [dataQuestion, setDataQuestion] = useState('Error with loading data');    
     const [currentQuestion , setCurrentQuestion] = useState(0);
-    const [points, setPoints] = useState(0); 
-    const [canSetPoint, setCanSetPoint] = useState(true);
+    const [points, setPoints] = useState(0);
 
+    const [canSetPoint, setCanSetPoint] = useState(true);
+    
     useEffect(() => {
-        fetch(`https://opentdb.com/api.php?amount=${countOfMaxQuestion}`)
+        (
+            difficulty === 'any' ? 
+            fetch(`https://opentdb.com/api.php?amount=${countOfMaxQuestion}`) 
+            : 
+            fetch(`https://opentdb.com/api.php?amount=${countOfMaxQuestion}&difficulty=${difficulty}`)
+        )
             .then(response => response.json())
             .then(data => setDataQuestion(data.results));
-    }, [countOfMaxQuestion])
+    }, [countOfMaxQuestion,difficulty])
 
-    const shuffle = (array) => {
-        var currentIndex = array.length, temporaryValue, randomIndex;
-        // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
-          // Pick a remaining element...
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex -= 1;
-          // And swap it with the current element.
-          temporaryValue = array[currentIndex];
-          array[currentIndex] = array[randomIndex];
-          array[randomIndex] = temporaryValue;
-        }
-        return array;
-    }
-    // Create array to add incorect answers and then scale 2arrays, really dunoo its just worked so... XD
-    const array = []; 
-    const array2 = dataQuestion[currentQuestion].incorrect_answers;
+    // Create 2 testArrays for add this to one correct array
+    const TestArray = []; 
+    // Add incorect answer
+    const TestArray2 = dataQuestion[currentQuestion].incorrect_answers;
     // Add corect answer
-    array.push(dataQuestion[currentQuestion].correct_answer)
-
+    TestArray.push(dataQuestion[currentQuestion].correct_answer)
+    //Scale arrays
+    const arrayOfAnswers = TestArray.concat(TestArray2);
+    
     const checkIsCorrect = (event) => {
         const value = event.target.value
         const correctAnswer = dataQuestion[currentQuestion].correct_answer;
@@ -48,13 +46,11 @@ const Questions = ( props ) => {
             setCanSetPoint(false);
             return setPoints(points + 1);
         }
-        setCanSetPoint(true);
-        // console.log(canSetPoint)
-        return points === 0 ? setPoints(points) : setPoints(points-1);
+        return setCanSetPoint(true)
     }
     return (
         <div className='Questions'>
-            {/* { 'points ' +  points} */}
+            { 'points ' +  points}
             {/* Count of question */}
             <QuestionsCounter 
                 currentQuestion= {currentQuestion}
@@ -64,10 +60,8 @@ const Questions = ( props ) => {
             <QuestionsContainer
                 dataQuestion= {dataQuestion}
                 currentQuestion= {currentQuestion}
-                array= {array}
-                array2= {array2}
+                arrayOfAnswers= {arrayOfAnswers}
                 checkIsCorrect= {checkIsCorrect}
-                shuffle= {shuffle}
             />
 
             {/* Condition who is showing button or link to result depends on the points  */}

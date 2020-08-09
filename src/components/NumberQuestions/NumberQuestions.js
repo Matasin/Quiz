@@ -4,9 +4,10 @@ import { CSSTransition } from 'react-transition-group'
 
 import { Link } from 'react-router-dom'
 
-const  NumberQuestions = () => {
+const NumberQuestions = () => {
 
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(10);
+    const [difficulty, setDifficulty] = useState('any');
     const countRef = React.createRef();
 
     const setCountOfQuestions = (event) => {
@@ -14,6 +15,7 @@ const  NumberQuestions = () => {
         event.preventDefault();
         setCount(value)
     }
+
     return (
         <div className='NumberQuestions'>
             <CSSTransition
@@ -22,7 +24,9 @@ const  NumberQuestions = () => {
                 timeout= { 1000 }
                 classNames= { 'A-opacity' }
             >
-                <h1 className='Greeting-Header'>Before we start, please select number of questions you want to answer</h1>
+                <h2 className='Greeting-Header'>
+                    Before we start, please select number of questions and difficulty you want to answer
+                </h2>
             </CSSTransition>
 
             <div className='Greeting-Keep-Going-Container'>
@@ -42,6 +46,22 @@ const  NumberQuestions = () => {
                 </CSSTransition>
             </div>
 
+            <div className='NumberQuestions-Buttons-Difficulty'>
+            {buttonDificulity.map( (level, key) => {
+                return (
+                    <button
+                        className='NumberQuestions-Input'
+                        type='text' 
+                        placeholder= {level}
+                        onClick={() => setDifficulty(level)}
+                        key= {key}
+                    >
+                        {level}
+                    </button>
+                )
+            })}
+            </div>
+            
             <CSSTransition
                     in= { true }
                     appear = { true }
@@ -52,7 +72,8 @@ const  NumberQuestions = () => {
                         to={{
                             pathname: 'questions',
                             state: { 
-                                count
+                                count,
+                                difficulty
                               }
                         }} 
                         
@@ -70,17 +91,20 @@ const  NumberQuestions = () => {
             >
                 <div>
                     <h3 className='Greeting-Header'>
-                        Remember, all question are completely random ( I'm talking about the difficulties of the task ) 
+                        <p>Default "Any" category and 10 questions</p>
                     </h3>
-                    <h5 
-                        className='Greeting-Header'>So please dont be mad :) 
-                    </h5>
                 </div>
             </CSSTransition>
 
         </div>
     )
 }
+const buttonDificulity = [
+    'easy',
+    'medium',
+    'hard',
+    'any'
+]
 
 
 export default NumberQuestions;

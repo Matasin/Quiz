@@ -1,13 +1,14 @@
 import React from'react';
 import { CSSTransition } from 'react-transition-group'
 
-export const QuestionAnswers = ( {array, array2, checkIsCorrect, shuffle} ) => {
-    const randomizeAnswers = array.concat(array2);
-    //Randomize answers before first was alwayts correct
-    shuffle(randomizeAnswers);
+export const QuestionAnswers = ( {arrayOfAnswers, checkIsCorrect} ) => {
+
+    const shuffle = (array) => array.sort( () => Math.random - 0.5);
+    shuffle(arrayOfAnswers)
+
     return (
         <div className='Question-Answers'>  
-            {randomizeAnswers.map( (answer, index) => {
+            {arrayOfAnswers.map( (answer, index) => {
                 return (
                     <CSSTransition
                         in= { true }
