@@ -1,7 +1,7 @@
 import React from'react';
 import { QuestionAnswers } from './QuestionAnswers'
 
-export const QuestionsContainer = ( {dataQuestion, currentQuestion, array, array2, checkIsCorrect } ) => (
+export const QuestionsContainer = ( {dataQuestion, currentQuestion, array, array2, checkIsCorrect, shuffle } ) => (
     <div className='Questions-Container'>
         <div className='Question-Info'>
             <p>
@@ -11,13 +11,14 @@ export const QuestionsContainer = ( {dataQuestion, currentQuestion, array, array
         </div>
         <div className='Question-Question'>  
             <p>
-                Question is :{dataQuestion[currentQuestion].question}
+                Question is: {dataQuestion[currentQuestion].question}
             </p>
         </div>
         <QuestionAnswers
             array= {array}
             array2= {array2}
             checkIsCorrect= {checkIsCorrect}
+            shuffle= {shuffle}
         />
     </div>
 )

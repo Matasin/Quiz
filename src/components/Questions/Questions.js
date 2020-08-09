@@ -21,6 +21,20 @@ const Questions = ( props ) => {
             .then(data => setDataQuestion(data.results));
     }, [countOfMaxQuestion])
 
+    const shuffle = (array) => {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+          // And swap it with the current element.
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+        return array;
+    }
     // Create array to add incorect answers and then scale 2arrays, really dunoo its just worked so... XD
     const array = []; 
     const array2 = dataQuestion[currentQuestion].incorrect_answers;
@@ -35,15 +49,12 @@ const Questions = ( props ) => {
             return setPoints(points + 1);
         }
         setCanSetPoint(true);
-        console.log(canSetPoint)
-        // const onlyOneTime = () =>{
-        //     if(points - 1 === points -2){return setPoints(points)}
-        // }
+        // console.log(canSetPoint)
         return points === 0 ? setPoints(points) : setPoints(points-1);
     }
     return (
         <div className='Questions'>
-            { 'points ' +  points}
+            {/* { 'points ' +  points} */}
             {/* Count of question */}
             <QuestionsCounter 
                 currentQuestion= {currentQuestion}
@@ -56,6 +67,7 @@ const Questions = ( props ) => {
                 array= {array}
                 array2= {array2}
                 checkIsCorrect= {checkIsCorrect}
+                shuffle= {shuffle}
             />
 
             {/* Condition who is showing button or link to result depends on the points  */}
