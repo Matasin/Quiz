@@ -33,6 +33,7 @@ const Questions = ( props ) => {
     const TestArray = []; 
     // Add corect answer
     TestArray.push(dataQuestion[currentQuestion].correct_answer)
+    console.log(TestArray)
     // Add incorect answer
     const TestArray2 = dataQuestion[currentQuestion].incorrect_answers;
     //Scale arrays
@@ -42,14 +43,14 @@ const Questions = ( props ) => {
         const value = event.target.value
         const correctAnswer = dataQuestion[currentQuestion].correct_answer;
         if(canSetPoint === true && value === correctAnswer) {
-            setCanSetPoint(false);
+            setCanSetPoint(!canSetPoint);
             return setPoints(points + 1);
         }
-        return setCanSetPoint(true)
+        return setCanSetPoint(false)
     }
     return (
         <div className='Questions'>
-            {/* { 'points ' +  points} */}
+            { 'points ' +  points}
             {/* Count of question */}
             <QuestionsCounter 
                 currentQuestion= {currentQuestion}

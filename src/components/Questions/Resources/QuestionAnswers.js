@@ -2,12 +2,10 @@ import React from'react';
 import { CSSTransition } from 'react-transition-group'
 
 export const QuestionAnswers = ( {arrayOfAnswers, checkIsCorrect} ) => {
-
-    const shuffle = ( array ) => array.sort(() => Math.random() - 0.5);
-    shuffle(arrayOfAnswers);
+    const shuffle = ( array ) => array.sort(() => Math.random() - 0.25);
     return (
         <div className='Question-Answers'>  
-            {arrayOfAnswers.map( (answer, index) => {
+            {shuffle(arrayOfAnswers).map( (answer, index) => {
                 return (
                     <CSSTransition
                         in= { true }
